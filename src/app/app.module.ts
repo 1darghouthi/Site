@@ -20,6 +20,12 @@ import { PlayerInfoComponent } from './components/player-info/player-info.compon
 import { AddMatchComponent } from './components/add-match/add-match.component';
 import { AddTeamComponent } from './components/add-team/add-team.component';
 import { AddPlayerComponent } from './components/add-player/add-player.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { MatchesTableComponent } from './components/matches-table/matches-table.component';
+import { PlayersTableComponent } from './components/players-table/players-table.component';
+import { TeamsTableComponent } from './components/teams-table/teams-table.component';
+import { MyMatchesComponent } from './components/my-matches/my-matches.component';
+import { ArticleComponent } from './components/article/article.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,13 @@ import { AddPlayerComponent } from './components/add-player/add-player.component
     PlayerInfoComponent,
     AddMatchComponent,
     AddTeamComponent,
-    AddPlayerComponent
+    AddPlayerComponent,
+    AdminComponent,
+    MatchesTableComponent,
+    PlayersTableComponent,
+    TeamsTableComponent,
+    MyMatchesComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,13 @@
-<div class="row">
+<div class="container">
+  <div class="row" style="padding-top: 150px;">
     <div class="col-12 title-section">
       <h2 class="heading">Upcoming Match</h2>
     </div>
-    <div class="col-lg-6 mb-4">
-        <app-match></app-match> 
+    <div class="col-lg-6 mb-4" *ngFor="let m of matches">
+        <app-match [X]="m"></app-match> 
         </div>
 
-        <div class="col-lg-6 mb-4">
+        <!-- <div class="col-lg-6 mb-4">
           <app-match></app-match> 
           </div>
 
@@ -20,6 +21,7 @@
 
               <div class="col-lg-6 mb-4">
                 <app-match></app-match> 
-                </div>
-      </div>
+                </div>-->
+      </div> 
   
+</div>
