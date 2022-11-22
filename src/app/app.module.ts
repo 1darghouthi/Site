@@ -26,6 +26,7 @@ import { PlayersTableComponent } from './components/players-table/players-table.
 import { TeamsTableComponent } from './components/teams-table/teams-table.component';
 import { MyMatchesComponent } from './components/my-matches/my-matches.component';
 import { ArticleComponent } from './components/article/article.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { ArticleComponent } from './components/article/article.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
