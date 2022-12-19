@@ -4,13 +4,17 @@
         <th>Stadium</th>
         <th>Owner</th>
         <th>Country</th>
+        <th>Actions</th>
         
     </tr>
-    <tr>
-        <td>PSG</td>
-        <td>Satdium1</td>
-        <td>salah</td>
-        <td>France</td>
+    <tr *ngFor="let team of teams">
+        <td>{{team.name}}</td>
+        <td>{{team.stadium}}</td>
+        <td>{{team.owner}}</td>
+        <td>{{team.country}}</td>
+        <td>
+            <button class="btn btn-success" (click)="goToDisplay(team.id)">Display Team</button>
+        </td>
         
     </tr>
 </table>

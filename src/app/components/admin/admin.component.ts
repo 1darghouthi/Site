@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
+  actualDate:any;
+  title:string= " admin ";
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.actualDate = new Date(); 
   }
 
 }

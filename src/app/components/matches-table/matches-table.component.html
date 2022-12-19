@@ -1,14 +1,25 @@
+<form >
+    <input type="text" class="form-control" [(ngModel)]="term" name="value" style="margin-top: 50px;"> 
+</form>
+{{term}}
 <table class="table">
     <tr>
        <th>Score One</th> 
        <th>Score Two</th> 
        <th>Team One</th> 
        <th>Team Two</th> 
+       <th>Action</th> 
     </tr>
-    <tr *ngFor="let elt of T">
-        <td>{{elt.scoreOne}}</td>
-        <td>{{elt.scoreTwo}}</td>
-        <td>{{elt.teamOne}}</td>
-        <td>{{elt.teamTwo}}</td>
+    <tr *ngFor="let elt of T | myFilter:term">
+        <td [ngStyle]="{'color': color(elt.scoreOne,elt.scoreTwo)}">{{elt.scoreOne}}</td>
+        <td [ngStyle]="{'color': color(elt.scoreTwo,elt.scoreOne)}">{{elt.scoreTwo}}</td>
+        <td [ngStyle]="{'color': color(elt.scoreOne,elt.scoreTwo)}">{{elt.teamOne}}</td>
+        <td [ngStyle]="{'color': color(elt.scoreTwo,elt.scoreOne)}">{{elt.teamTwo}}</td>
+        <td>
+            <button class="btn btn-success" (click)="goToDisplay(elt.id)">Display</button>
+            <button class="btn btn-warning" (click)="goToEdit(elt.id)">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+        </td>
+        
     </tr>
 </table>
