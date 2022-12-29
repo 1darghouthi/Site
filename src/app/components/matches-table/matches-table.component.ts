@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatchService } from 'src/app/services/match.service';
 
 @Component({
   selector: 'app-matches-table',
@@ -7,18 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./matches-table.component.css']
 })
 export class MatchesTableComponent implements OnInit {
-T : any;
+T : any=[];
 term:any;
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private matchService: MatchService) { }
 
   ngOnInit()  {
+    this.matchService.getAllMatches().subscribe(
+      (response)=>{
+        this.T = response;
+      }
+    )
 
-    this.T =[
-      {id:1, scoreOne:1, scoreTwo:3, teamOne:"RMD", teamTwo:"FCB"},
-      {id:2, scoreOne:2, scoreTwo:3, teamOne:"JUV", teamTwo:"FCB"},
-      {id:3, scoreOne:0, scoreTwo:0, teamOne:"EST", teamTwo:"FCB"},
-      {id:4, scoreOne:3, scoreTwo:1, teamOne:"RMD", teamTwo:"EST"},
-    ]
+   
   }
 
   goToDisplay(id:number){

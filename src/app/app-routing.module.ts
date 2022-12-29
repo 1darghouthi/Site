@@ -4,12 +4,15 @@ import { AddMatchComponent } from './components/add-match/add-match.component';
 import { AddPlayerComponent } from './components/add-player/add-player.component';
 import { AddTeamComponent } from './components/add-team/add-team.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { DisplayMatchComponent } from './components/display-match/display-match.component';
+import { EditMatchComponent } from './components/edit-match/edit-match.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatchesComponent } from './components/matches/matches.component';
 import { MyMatchesComponent } from './components/my-matches/my-matches.component';
 import { PlayersComponent } from './components/players/players.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { TeamInformationComponent } from './components/team-information/team-information.component';
 
 
 const routes: Routes = [
@@ -23,6 +26,10 @@ const routes: Routes = [
   {path:'addPlayer', component:AddPlayerComponent},
   {path:'admin', component:AdminComponent},
   {path:'myMatches', component:MyMatchesComponent},
+  // displayMatch/:id => rendre le path dynamique
+  {path:'displayMatch/:id', component:DisplayMatchComponent},
+  {path:'displayTeam/:id', component:TeamInformationComponent},
+  {path:'editMatch/:id', component:EditMatchComponent}
 ];
 
 

@@ -27,6 +27,15 @@ import { TeamsTableComponent } from './components/teams-table/teams-table.compon
 import { MyMatchesComponent } from './components/my-matches/my-matches.component';
 import { ArticleComponent } from './components/article/article.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DisplayMatchComponent } from './components/display-match/display-match.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { TeamInformationComponent } from './components/team-information/team-information.component';
+import { EditMatchComponent } from './components/edit-match/edit-match.component';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { AsterixPipe } from './pipes/asterix.pipe';
+import { MyFilterPipe } from './pipes/my-filter.pipe';
+import {HttpClientModule} from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -53,13 +62,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PlayersTableComponent,
     TeamsTableComponent,
     MyMatchesComponent,
-    ArticleComponent
+    ArticleComponent,
+    DisplayMatchComponent,
+    BannerComponent,
+    TeamInformationComponent,
+    EditMatchComponent,
+    ReversePipe,
+    AsterixPipe,
+    MyFilterPipe,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
