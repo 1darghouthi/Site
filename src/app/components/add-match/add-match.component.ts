@@ -20,7 +20,7 @@ export class AddMatchComponent implements OnInit {
     private matchService: MatchService,
     private router:Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   // Function that will be called when btn is clicked

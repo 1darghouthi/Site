@@ -32,7 +32,7 @@ export class MatchService {
   }
   
   editMatch(obj) {
-    return this.http.put (this.matchURL, obj);
+    return this.http.put (`${this.matchURL}/${obj.id}`, obj);
   }
 
   // Request to delete object by ID ( Response : message)

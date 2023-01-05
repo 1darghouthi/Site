@@ -42,4 +42,18 @@ term:any;
       return'blue';
     }
   }
-}
+
+  deleteMatch(id){
+    // alert(id);
+    this.matchService.deleteMatchById(id).subscribe(
+      (response)=> {
+        console.log("Here response after delete", response);
+        this.matchService.getAllMatches().subscribe(
+          (response)=> {
+            this.T = response;
+          }
+        )
+      }
+    )
+  }
+  }
