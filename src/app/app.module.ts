@@ -35,6 +35,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { AsterixPipe } from './pipes/asterix.pipe';
 import { MyFilterPipe } from './pipes/my-filter.pipe';
 import {HttpClientModule} from "@angular/common/http";
+import { UsersTableComponent } from './components/users-table/users-table.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -70,6 +72,8 @@ import {HttpClientModule} from "@angular/common/http";
     ReversePipe,
     AsterixPipe,
     MyFilterPipe,
+    UsersTableComponent,
+    ProfileComponent,
     
   ],
   imports: [

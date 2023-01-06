@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MatchesComponent } from './components/matches/matches.component';
 import { MyMatchesComponent } from './components/my-matches/my-matches.component';
 import { PlayersComponent } from './components/players/players.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TeamInformationComponent } from './components/team-information/team-information.component';
 
@@ -29,7 +30,8 @@ const routes: Routes = [
   // displayMatch/:id => rendre le path dynamique
   {path:'displayMatch/:id', component:DisplayMatchComponent},
   {path:'displayTeam/:id', component:TeamInformationComponent},
-  {path:'editMatch/:id', component:EditMatchComponent}
+  {path:'editMatch/:id', component:EditMatchComponent},
+  {path:'profile/:id', component:ProfileComponent}
 ];
 
 

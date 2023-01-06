@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
+  getAllUsers() {
+    throw new Error('Method not implemented.');
+  }
 
   userURL : string ="http://localhost:3000/users";
 
