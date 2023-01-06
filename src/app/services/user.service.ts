@@ -32,11 +32,11 @@ export class UserService {
 
   //Add User
   signup(user){
-    return this.http.post(user.userURL +"/signup", user);
+    return this.http.post(this.userURL, user);
   }
 
   //Login (to connect)
-  login(user){
-    return this.http.post(this.userURL +"/ligin", user);
-  }
+  // login(user){
+  //   return this.http.post(this.userURL +"/ligin", user);
+  // }
 }
