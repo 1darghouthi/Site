@@ -21,7 +21,7 @@ export class DisplayMatchComponent implements OnInit {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
    this.matchService.displayMatchById(this.id).subscribe(
     (response) => {
-      this.match = response;
+      this.match = response.x;
     }
    )
     }

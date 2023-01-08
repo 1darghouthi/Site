@@ -31,8 +31,30 @@ let matches = [
         "teamOne": "mm",
         "teamTwo": "oo",
         "id": 3
+      },
+      {
+        "scoreOne": "3",
+        "scoreTwo": "1",
+        "teamOne": "RMD",
+        "teamTwo": "Paris",
+        "id": 3
       }
-]
+];
+
+ function generateId(T) {
+  var max;
+  if (T.length == 0) {
+    max = 0;
+  } else {
+    max = T[0].id;
+    for (let i = 0; i < T.length; i++) {
+      if (T[i].id > max) {
+        max = T[i].id;
+      }
+    }
+  }
+  return max;
+}
 
 app.use(bodyParser.json());
 
@@ -59,4 +81,48 @@ app.use((req, res, next) => {
     res.json({x:matches});
   });
 
+  // Traitement du request : Get Match By ID
+  app.get("/matches/:id", (req, res)=>{
+    console.log("Here into get match by ID", req.params.id);
+    let match = matches.find((obj)=>{
+      return obj.id == req.params.id
+    });
+    // for (let i =0; i <matches.length; i++){
+
+    //  if (matches[i].id == req.params.id){
+    //   match = matches[i];
+    //   break;
+    //  }
+    // }
+    res.json({x:match});
+
+  });
+
+// Traitement du request : Add Match
+  app.post("/matches", (req,res)=> {
+    console.log("Here into add",req.body);
+    // save object into matches
+    let match = req.body;
+    match.id = generateId(matches)+1;
+    matches.push(match);
+    // response
+    res.json ({ message: "Added with success"});
+  });
+
+  // Traitement du request : Delete Match By ID
+  app.delete("/matches/:id", (req, res)=>{
+    console.log("Here into delete", req.params.id);
+    for (let i=0; i<matches.length;i++) {
+      if (matches[i].id == req.params.id){
+        matches.splice(i, 1);
+        break;
+      }
+    }
+    res.json({message: "Deleted with success"});
+
+  });
+
+
+  //------------Exportation de l'app------------//
+  // App is importable from another files
 module.exports = app;

@@ -22,13 +22,13 @@ export class MatchService {
   }
 
   displayMatchById(id) {
-    return this.http.get(`${this.matchURL}/${id}`);
+    return this.http.get<{x:any}>(`${this.matchURL}/${id}`);
     // return this.http.get (this.matchURL + `/${id}`);
   }
   
  
   addMatch(obj : any) {
-    return this.http.post (this.matchURL, obj);
+    return this.http.post<{message:string}> (this.matchURL, obj);
   }
   
   editMatch(obj) {
@@ -38,7 +38,7 @@ export class MatchService {
   // Request to delete object by ID ( Response : message)
 
   deleteMatchById(id) {
-    return this.http.delete(`${this.matchURL}/${id}`);
+    return this.http.delete<{message:string}>(`${this.matchURL}/${id}`);
   }
 
 }

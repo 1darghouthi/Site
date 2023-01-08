@@ -47,10 +47,10 @@ term:any;
     // alert(id);
     this.matchService.deleteMatchById(id).subscribe(
       (response)=> {
-        console.log("Here response after delete", response);
+        console.log("Here response after delete", response.message);
         this.matchService.getAllMatches().subscribe(
           (response)=> {
-            this.T = response;
+            this.T = response.x;
           }
         )
       }

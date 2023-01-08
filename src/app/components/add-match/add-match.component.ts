@@ -28,7 +28,7 @@ export class AddMatchComponent implements OnInit {
   console.log("Here match", this.match);
   this.matchService.addMatch(this.match).subscribe(
     (response)=> {
-      console.log("Here reponse after adding match", response);
+      console.log("Here reponse after adding match", response.message);
       this.router.navigate(["admin"]);
       
 
