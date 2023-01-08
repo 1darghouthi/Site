@@ -18,7 +18,7 @@ export class MatchService {
   constructor(private http: HttpClient) { }
 
   getAllMatches() {
-    return this.http.get(this.matchURL);
+    return this.http.get<{x:any}>(this.matchURL);
   }
 
   displayMatchById(id) {

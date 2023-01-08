@@ -17,7 +17,7 @@ term:any;
   ngOnInit()  {
     this.matchService.getAllMatches().subscribe(
       (response)=>{
-        this.T = response;
+        this.T = response.x;
       }
     )
 
