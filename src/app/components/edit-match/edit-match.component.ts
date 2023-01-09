@@ -24,7 +24,7 @@ export class EditMatchComponent implements OnInit {
     this.id = this.activatedRouter.snapshot.paramMap.get('id');
     this.matchService.displayMatchById(this.id).subscribe(
       (response)=>{
-        this.match = response;
+        this.match = response.x;
 
 
       }
@@ -44,6 +44,8 @@ export class EditMatchComponent implements OnInit {
   editMatch(){
     this.matchService.editMatch(this.match).subscribe(
       (response)=>{
+        console.log("Here response from BE", response.message);
+        
         this.router.navigate(['admin']);
       }
       
