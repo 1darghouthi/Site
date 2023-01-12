@@ -26,8 +26,8 @@ let matches = [
         "teamTwo": "FCB B"
       },
       {
-        "scoreOne": "5",
-        "scoreTwo": "6",
+        "scoreOne": "3",
+        "scoreTwo": "1",
         "teamOne": "mm",
         "teamTwo": "oo",
         "id": 3
@@ -122,6 +122,32 @@ app.use((req, res, next) => {
 
   });
 
+   // Traitement du request : Edit Match By ID
+   app.put("/matches/:id", (req,res)=>{
+    console.log("Here into edit match Body", req.body);
+    console.log("Here into edit match ID", req.params.id);
+    for (let i=0; i<matches.length; i++){
+      if(matches[i].id== req.params.id){
+      matches[i] = req.body;
+      break;
+    }
+  }
+  res.json({message: "Edited with success"});
+   });
+
+   // Traitement du request : search matches 
+   app.post("/matches/search", (req,res)=>{
+    console.log("Here into search", req.body);
+    let findedMatches=[];
+    for (let i=0; i< matches.length ; i++){
+      if(matches[i].scoreOne == req.body.scoreOne && matches[i].scoreTwo== req.body.scoreTwo){
+        findedMatches.push(matches[i]);
+      }
+    }
+    console.log("Here finded matches", findedMatches);
+    res.json({matches: findedMatches});
+
+   });
 
   //------------Exportation de l'app------------//
   // App is importable from another files

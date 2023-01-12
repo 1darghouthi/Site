@@ -32,13 +32,19 @@ export class MatchService {
   }
   
   editMatch(obj) {
-    return this.http.put (`${this.matchURL}/${obj.id}`, obj);
+    return this.http.put<{message:string}>(`${this.matchURL}/${obj.id}`, obj);
   }
 
   // Request to delete object by ID ( Response : message)
 
   deleteMatchById(id) {
     return this.http.delete<{message:string}>(`${this.matchURL}/${id}`);
+  }
+
+  // Request to search matches by sc1 and sc2 ( Response : Array)
+  searchMatches(obj){
+    return this.http.post<{matches:any}>(`${this.matchURL}/search`,obj);
+
   }
 
 }

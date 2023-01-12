@@ -37,6 +37,8 @@ import { MyFilterPipe } from './pipes/my-filter.pipe';
 import {HttpClientModule} from "@angular/common/http";
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchComponent } from './components/search/search.component';
+import { AddStadiumComponent } from './components/add-stadium/add-stadium.component';
 
 
 @NgModule({
@@ -74,6 +76,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     MyFilterPipe,
     UsersTableComponent,
     ProfileComponent,
+    SearchComponent,
+    AddStadiumComponent,
     
   ],
   imports: [
