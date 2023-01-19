@@ -15,7 +15,7 @@ export class UserService {
 
 // Array of objects
   getAllUser(){
-    return this.http.get(this.userURL);
+    return this.http.get<{users: any}>(this.userURL);
   }
   //response : user object
   getUserProfile(id){

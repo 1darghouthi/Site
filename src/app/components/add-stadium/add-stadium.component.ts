@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { StadiumService } from 'src/app/services/stadium.service';
 
 @Component({
   selector: 'app-add-stadium',
@@ -11,13 +12,14 @@ export class AddStadiumComponent implements OnInit {
   stadium: any ={};
   stadiumForm: FormGroup;
 
-  constructor() { }
+  constructor(private stadiumService: StadiumService) { }
 
   ngOnInit(): void {
   }
 
   addStadium(){
     console.log("Here stadium", this.stadium);
+    this.stadiumService.addStadium(this.stadium).subscribe();
     
   }
 

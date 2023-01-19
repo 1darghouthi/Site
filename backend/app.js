@@ -41,6 +41,41 @@ let matches = [
       }
 ];
 
+let users = [
+  {
+    id:1,
+    firstName:"Anis",
+    lastName: "Darghouthi",
+    email: "anis@gmail.com",
+    pwd: "aaa",
+    role: "client",
+
+  },
+  {
+    id:2,
+    firstName:"salah",
+    lastName: "Masmoudi",
+    email: "salah@gmail.com",
+    pwd: "aaa",
+    role: "admin",
+
+  },
+];
+
+let stadiums =[
+  {id: 1,
+  name:"Camp New",
+  country:"Spain",
+  capacity:8000
+},
+{id: 2,
+  name:"Arena",
+  country:"Tunisia",
+  capacity:300
+},
+
+];
+
  function generateId(T) {
   var max;
   if (T.length == 0) {
@@ -135,7 +170,7 @@ app.use((req, res, next) => {
   res.json({message: "Edited with success"});
    });
 
-   // Traitement du request : search matches 
+   // Traitement du request : search matches
    app.post("/matches/search", (req,res)=>{
     console.log("Here into search", req.body);
     let findedMatches=[];
@@ -148,6 +183,59 @@ app.use((req, res, next) => {
     res.json({matches: findedMatches});
 
    });
+   // Traitement du request : Get All Users
+   app.get("/users", (req, res)=>{
+    console.log("Here into get all users");
+    User.find().then((docs)=>{
+      res.json({ user : doc});
+    })
+
+   });
+
+   // Traitement du request :   Login User
+   app.post("/users/login", (req, res) => {
+    console.log("Here into login", req.body);
+    User.findOne({ email: req.body.email }).then((findedUser) => {
+        if (!findedUser) {
+            res.json({ message: "0" });
+        }
+        return bcrypt.compare(req.body.pwd, findedUser.pwd);
+    })
+        .then((pwdResult) => {
+            console.log("Here compare result", pwdResult);
+            if (!pwdResult) {
+                console.log("Send response with incorrect PWD");
+                res.json({ message: "1" });
+            } else {
+                User.findOne({ email: req.body.email }).then((finalUser) => {
+                    console.log("Here final user", finalUser);
+                    let user = {
+                        id: finalUser._id,
+                        fName: finalUser.firstName,
+                        lName: finalUser.lastName,
+                        role: finalUser.role,
+                    };
+                    res.json({ message: "2", user: user });
+                });
+            }
+        });
+});
+
+
+
+//*******************************************************//
+
+// Traitement du request : Add Stadium
+app.post("/stadiums", (req, res)=>{
+  console.log("Here into add stadium", req.body);
+  let stadiumObj = req.body;
+  stadiumObj.id = generateId(stadiums)+1;
+  stadiums.push(stadiumObj);
+  res.json({message : "Stadium added with success"});
+
+});
+
+
 
   //------------Exportation de l'app------------//
   // App is importable from another files
