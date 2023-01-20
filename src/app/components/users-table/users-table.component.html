@@ -1,22 +1,31 @@
+<div class="widget dashboard-container my-adslist">
+	<table class="table table-responsive product-dashboard-table">
+		<thead>
+			<tr>
+				<th>Images</th>
+				<th>ID</th>
+				<th class="text-center">First Name</th>
+				<th class="text-center">Last Name</th>
+				<th class="text-center">Email</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let elt of users" style="width:100px; height: 100px;">
 
-<table class="table">
-    <tr>
-       <th>ID</th> 
-       <th>First Name</th> 
-       <th>Last Name</th> 
-       <th>Email</th> 
-       <th>Action</th> 
-    </tr>
-    <tr *ngFor="let elt of users">
-        <td >{{elt.id}}</td>
-        <td >{{elt.firstName}}</td>
-        <td >{{elt.lastName}}</td>
-        <td >{{elt.email}}</td>
-        <td>
-            <button class="btn btn-success" (click)="goToProfile(elt.id)">Display</button>
-            <button class="btn btn-warning" >Edit</button>
-            <button class="btn btn-danger"  >Delete</button>
-        </td>
-        
-    </tr>
-</table>
+				<td class="product-thumb">
+					<img width="80px" height="auto" src={{elt.avatar}} >
+				</td>
+				<td class="text-center">{{elt.id}}</td>
+                <td class="text-center">{{elt.firstName}}</td>
+                <td class="text-center">{{elt.lastName}}</td>
+                <td class="text-center">{{elt.email}}</td>
+				<td>
+					<button type="button" class="btn btn-success" (click)="goToDisplay(elt._id)">Display</button>
+					<button type="button" class="btn btn-danger" (click)="goToDelete(elt._id)">Delete</button>
+				  </td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

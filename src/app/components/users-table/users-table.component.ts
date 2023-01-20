@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./users-table.component.css']
 })
 export class UsersTableComponent implements OnInit {
+  id:any;
 
   users: any = [];
 
@@ -27,4 +28,17 @@ export class UsersTableComponent implements OnInit {
     this.router.navigate([`profile/${id}`]);
   }
 
+  goToDelete(id: number) {
+    this.userService.deleteUser(id).subscribe(
+      (response) => {
+        console.log("Here response after delete", response);
+        this.userService.getAllUser().subscribe(
+          (response) => {
+            this.users = response.users;
+          }
+        )
+      }
+    )
+
+  }
 }
