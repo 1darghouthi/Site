@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { StadiumService } from 'src/app/services/stadium.service';
 
 @Component({
@@ -12,15 +13,22 @@ export class AddStadiumComponent implements OnInit {
   stadium: any ={};
   stadiumForm: FormGroup;
 
-  constructor(private stadiumService: StadiumService) { }
+  constructor(private stadiumService: StadiumService,
+    private router:Router) { }
 
   ngOnInit(): void {
   }
 
   addStadium(){
     console.log("Here stadium", this.stadium);
-    this.stadiumService.addStadium(this.stadium).subscribe();
-    
+    this.stadiumService.addStadium(this.stadium).subscribe(
+      (response)=>{
+        console.log("Here response from BE", response.message);
+        this.router.navigate(["admin"]);
+
+      }
+    );
+
   }
 
 }

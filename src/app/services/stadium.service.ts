@@ -11,7 +11,7 @@ export class StadiumService {
   constructor(private httpClient: HttpClient) { }
 
   addStadium(obj){
-    return this.httpClient.post(this.stadiumURL, obj);
+    return this.httpClient.post<{message:string}>(this.stadiumURL, obj);
 
   }
 }

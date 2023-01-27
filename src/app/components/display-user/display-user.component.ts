@@ -16,15 +16,14 @@ export class DisplayUserComponent implements OnInit {
 
   ngOnInit() {
     // Get ID from path
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    //  Call Match Service to send request to get object by ID
-    this.userService.getUserById(this.id).subscribe(
-      (response) => {
-        // response : Array of objects
-        this.X = response.user ;
+  //   this.id = this.activatedRoute.snapshot.paramMap.get('id');
+  //   //  Call Match Service to send request to get object by ID
+  //   this.userService.getUserById(this.id).subscribe(
+  //     (response) => {
+  //       // response : Array of objects
+  //       this.X = response.user ;
 
-      }
-    );
+  //     }
+  //   );
   }
-
 }

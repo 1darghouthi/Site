@@ -110,6 +110,12 @@ app.use((req, res, next) => {
     next();
   });
 
+  // importation models ==> le nom du const PascalCase
+
+const User = require("./models/user");
+
+
+
 
   app.get("/matches", (req, res)=>{
     console.log("Here into get all matches");
@@ -191,6 +197,24 @@ app.use((req, res, next) => {
     })
 
    });
+
+   // traitement du request: Get user by id
+app.get("/users/:id", (req, res) => {
+  console.log("Here into get user by ID", req.params.id)
+  User.findOne({ id : req.params.id}).then((doc)=>{
+      res.json({ user : doc });
+  })
+  });
+
+   // traitement du request: delete Users
+app.delete("/users/:id", (req, res) => {
+  console.log("here into delete", req.params._id);
+  User.deleteOne({ _id: req.params.id }).then((response) => {
+      console.log("here response from Db", response);
+      if (response.deletedCount == 1)
+          res.json({ message: "deleted with success" });
+  })
+});
 
    // Traitement du request :   Login User
    app.post("/users/login", (req, res) => {

@@ -39,6 +39,10 @@ import { UsersTableComponent } from './components/users-table/users-table.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddStadiumComponent } from './components/add-stadium/add-stadium.component';
+import { DisplayUserComponent } from './components/display-user/display-user.component';
+import { TrendingComponent } from './components/trending/trending.component';
+import { TrendingAdsComponent } from './components/trending-ads/trending-ads.component';
+import { TrendingsComponent } from './components/trendings/trendings.component';
 
 
 @NgModule({
@@ -78,6 +82,10 @@ import { AddStadiumComponent } from './components/add-stadium/add-stadium.compon
     ProfileComponent,
     SearchComponent,
     AddStadiumComponent,
+    DisplayUserComponent,
+    TrendingComponent,
+    TrendingAdsComponent,
+    TrendingsComponent,
     
   ],
   imports: [

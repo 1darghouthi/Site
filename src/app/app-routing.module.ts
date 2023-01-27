@@ -6,6 +6,7 @@ import { AddStadiumComponent } from './components/add-stadium/add-stadium.compon
 import { AddTeamComponent } from './components/add-team/add-team.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { DisplayMatchComponent } from './components/display-match/display-match.component';
+import { DisplayUserComponent } from './components/display-user/display-user.component';
 import { EditMatchComponent } from './components/edit-match/edit-match.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:'displayTeam/:id', component:TeamInformationComponent},
   {path:'editMatch/:id', component:EditMatchComponent},
   {path:'profile/:id', component:ProfileComponent},
+  {path:'displayUser/:id', component:DisplayUserComponent },
   {path:'search', component:SearchComponent},
   {path:'addStadium', component: AddStadiumComponent},
 ];
