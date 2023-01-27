@@ -19,7 +19,7 @@ export class UsersTableComponent implements OnInit {
   ngOnInit() {
     this.userService.getAllUser().subscribe(
       (response)=> {
-        this.users= response;
+        this.users= response.users;
       }
     )
   }

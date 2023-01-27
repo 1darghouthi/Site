@@ -181,7 +181,8 @@ const User = require("./models/user");
     console.log("Here into search", req.body);
     let findedMatches=[];
     for (let i=0; i< matches.length ; i++){
-      if(matches[i].scoreOne == req.body.scoreOne && matches[i].scoreTwo== req.body.scoreTwo){
+      if(matches[i].scoreOne == req.body.scoreOne &&
+         matches[i].scoreTwo== req.body.scoreTwo){
         findedMatches.push(matches[i]);
       }
     }
@@ -189,12 +190,24 @@ const User = require("./models/user");
     res.json({matches: findedMatches});
 
    });
+
+
+   // Traitement du request : Add User
+   app.post("/users", (req, res)=>{
+    console.log("Here into signup ", req.body);
+    let user = req.body;
+    user.id = generateId(users)+1;
+    users.push(user);
+    res.json({message: "User added with success"});
+  });
+
+
    // Traitement du request : Get All Users
    app.get("/users", (req, res)=>{
     console.log("Here into get all users");
-    User.find().then((docs)=>{
-      res.json({ user : doc});
-    })
+
+      res.json({ users : users});
+
 
    });
 
@@ -258,6 +271,24 @@ app.post("/stadiums", (req, res)=>{
   res.json({message : "Stadium added with success"});
 
 });
+
+// Traitement du request : Get all Stadium
+
+app.get("/stadiums", (req, res)=>{
+  console.log("Here into get all stadiums");
+  res.json({ stadiums: stadiums});
+});
+// Traitement du request : Delete Stadium by ID
+app.delete("/stadiums/:id", (req,res)=>{
+  console.log("Here into delete",req.params.id);
+  for (let i=0; i<stadiums.length; i++){
+    if(stadiums[i].id ==req.params.id){
+      stadiums.splice(i,1);
+      break;
+    }
+  }
+  res.json({message: "Deleted with success"});
+})
 
 
 

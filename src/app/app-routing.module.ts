@@ -38,6 +38,7 @@ const routes: Routes = [
   {path:'displayUser/:id', component:DisplayUserComponent },
   {path:'search', component:SearchComponent},
   {path:'addStadium', component: AddStadiumComponent},
+  {path:'editStadium/:id', component: AddStadiumComponent},
 ];
 
 

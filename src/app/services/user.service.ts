@@ -39,7 +39,7 @@ export class UserService {
 
   //Add User
   signup(user){
-    return this.http.post(this.userURL, user);
+    return this.http.post<{message: string}>(this.userURL, user);
   }
 
   //Login (to connect)

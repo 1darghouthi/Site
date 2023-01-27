@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StadiumService } from 'src/app/services/stadium.service';
 
 @Component({
@@ -12,11 +12,16 @@ export class AddStadiumComponent implements OnInit {
 
   stadium: any ={};
   stadiumForm: FormGroup;
+  id:any;
 
-  constructor(private stadiumService: StadiumService,
-    private router:Router) { }
+  constructor(
+    private stadiumService: StadiumService,
+    private router:Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.id=this.activatedRoute.snapshot.paramMap.get("id");
+
   }
 
   addStadium(){

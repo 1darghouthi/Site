@@ -14,4 +14,11 @@ export class StadiumService {
     return this.httpClient.post<{message:string}>(this.stadiumURL, obj);
 
   }
+  getAllStadiums(){
+    return this.httpClient.get<{stadiums:any}>(this.stadiumURL);
+  }
+  deleteStadium(id){
+    return this.httpClient.delete<{message:string}>(`${this.stadiumURL}/${id}`);
+
+  }
 }

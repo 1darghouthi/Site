@@ -43,6 +43,7 @@ import { DisplayUserComponent } from './components/display-user/display-user.com
 import { TrendingComponent } from './components/trending/trending.component';
 import { TrendingAdsComponent } from './components/trending-ads/trending-ads.component';
 import { TrendingsComponent } from './components/trendings/trendings.component';
+import { StadiumTableComponent } from './components/stadium-table/stadium-table.component';
 
 
 @NgModule({
@@ -86,7 +87,9 @@ import { TrendingsComponent } from './components/trendings/trendings.component';
     TrendingComponent,
     TrendingAdsComponent,
     TrendingsComponent,
-    
+    StadiumTableComponent,
+
+
   ],
   imports: [
     BrowserModule,

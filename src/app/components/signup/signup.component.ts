@@ -32,12 +32,12 @@ export class SignupComponent implements OnInit {
     console.log("Here user object", this.signupForm.value );
     this.userService.signup(this.signupForm.value).subscribe(
       (response) => {
-        console.log("Here response after signup", response);
+        console.log("Here response after signup", response.message);
         this.router.navigate(['']);
-        
+
       }
     )
-    
+
   }
 
 }
