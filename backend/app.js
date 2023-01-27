@@ -232,31 +232,23 @@ app.delete("/users/:id", (req, res) => {
    // Traitement du request :   Login User
    app.post("/users/login", (req, res) => {
     console.log("Here into login", req.body);
-    User.findOne({ email: req.body.email }).then((findedUser) => {
-        if (!findedUser) {
-            res.json({ message: "0" });
-        }
-        return bcrypt.compare(req.body.pwd, findedUser.pwd);
-    })
-        .then((pwdResult) => {
-            console.log("Here compare result", pwdResult);
-            if (!pwdResult) {
-                console.log("Send response with incorrect PWD");
-                res.json({ message: "1" });
-            } else {
-                User.findOne({ email: req.body.email }).then((finalUser) => {
-                    console.log("Here final user", finalUser);
-                    let user = {
-                        id: finalUser._id,
-                        fName: finalUser.firstName,
-                        lName: finalUser.lastName,
-                        role: finalUser.role,
-                    };
-                    res.json({ message: "2", user: user });
-                });
-            }
-        });
-});
+    let isFounded=false;
+    let findedUser={};
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email == req.body.email && users[i].pwd == req.body.pwd){
+        isFounded=true;
+        findedUser={
+          firstName: user[i].firstName,
+          lastName: users[i].lastName,
+          email: users[i].email
+        };
+        break;
+      }
+
+    }
+    res.json ({isFounded: isFounded, user: findedUser});
+  });
+
 
 
 

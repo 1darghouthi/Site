@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class SignupComponent implements OnInit {
 
   signupForm:FormGroup;
+  path:string;
 
   constructor(
     private formBuilder:FormBuilder,
@@ -18,6 +19,9 @@ export class SignupComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit()  {
+    this.path = this.router.url;
+    console.log("Here path", this.path);
+
     this.signupForm = this.formBuilder.group({
       firstName:['',[Validators.required, Validators.minLength(3)]],
       lastName:['', [Validators.required, Validators.minLength(5)]],
@@ -29,7 +33,12 @@ export class SignupComponent implements OnInit {
   }
 
   signup(){
-    console.log("Here user object", this.signupForm.value );
+    if (this.path=="/register"){
+      this.signupForm.value.role="client";
+    } else{
+      this.signupForm.value.role= "admin";
+    }
+
     this.userService.signup(this.signupForm.value).subscribe(
       (response) => {
         console.log("Here response after signup", response.message);

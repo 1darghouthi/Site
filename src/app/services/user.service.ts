@@ -43,7 +43,7 @@ export class UserService {
   }
 
   //Login (to connect)
-  // login(user){
-  //   return this.http.post(this.userURL +"/ligin", user);
-  // }
+  login(user){
+    return this.http.post<{user:any, isFounded:boolean}>(`${this.userURL}/login` , user);
+  }
 }
