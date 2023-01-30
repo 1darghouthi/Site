@@ -26,14 +26,11 @@ export class  LoginComponent implements OnInit {
     console.log("Here user object", this.user);
     this.userService.login(this.user).subscribe(
       (response)=>{
-        console.log("Here response after login", response);
-
-
         if (response.isFounded) {
-         if (response.user.role=='client') {
+         if (response.user.role == 'client') {
           this.router.navigate(['']);
 
-         }else {
+         } else {
           this.router.navigate(['admin']);
          }
         } else{

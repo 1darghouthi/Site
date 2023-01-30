@@ -17,7 +17,7 @@ export class UsersTableComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.userService.getAllUser().subscribe(
+    this.userService.getAllUsers().subscribe(
       (response)=> {
         this.users= response.users;
       }
@@ -32,7 +32,7 @@ export class UsersTableComponent implements OnInit {
     this.userService.deleteUser(id).subscribe(
       (response) => {
         console.log("Here response after delete", response);
-        this.userService.getAllUser().subscribe(
+        this.userService.getAllUsers().subscribe(
           (response) => {
             this.users = response.users;
           }

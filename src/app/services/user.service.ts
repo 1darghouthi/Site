@@ -17,8 +17,8 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-// Array of objects
-  getAllUser(){
+// response : Array of objects
+  getAllUsers(){
     return this.http.get<{users: any}>(this.userURL);
   }
   //response : user object

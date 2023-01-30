@@ -211,6 +211,29 @@ const User = require("./models/user");
 
    });
 
+   // Traitement du request :   Login User
+   app.post("/users/login", (req, res) => {
+    console.log("Here into login", req.body);
+    let isFounded=false;
+    let findedUser={};
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email == req.body.email && users[i].pwd == req.body.pwd){
+        isFounded=true;
+        findedUser={
+          firstName: users[i].firstName,
+          lastName: users[i].lastName,
+          email: users[i].email,
+          role: users[i].role,
+
+        };
+        break;
+      }
+
+    }
+    res.json ({ isFounded: isFounded, user: findedUser});
+  });
+
+
    // traitement du request: Get user by id
 app.get("/users/:id", (req, res) => {
   console.log("Here into get user by ID", req.params.id)
@@ -229,25 +252,6 @@ app.delete("/users/:id", (req, res) => {
   })
 });
 
-   // Traitement du request :   Login User
-   app.post("/users/login", (req, res) => {
-    console.log("Here into login", req.body);
-    let isFounded=false;
-    let findedUser={};
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email == req.body.email && users[i].pwd == req.body.pwd){
-        isFounded=true;
-        findedUser={
-          firstName: user[i].firstName,
-          lastName: users[i].lastName,
-          email: users[i].email
-        };
-        break;
-      }
-
-    }
-    res.json ({isFounded: isFounded, user: findedUser});
-  });
 
 
 
