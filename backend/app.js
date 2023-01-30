@@ -284,8 +284,35 @@ app.delete("/stadiums/:id", (req,res)=>{
     }
   }
   res.json({message: "Deleted with success"});
-})
+});
 
+// Traitement du request : Get Stadium by ID
+
+app.get("/stadiums/:id", (req,res)=>{
+  console.log("Here id", req.params.id);
+  let findedStadium;
+  for (let i=0; i< stadiums.length; i++){
+    if(stadiums[i].id == req.params.id){
+      findedStadium = stadiums[i];
+      break;
+    }
+  }
+  res.json({ stadium: findedStadium});
+});
+
+// Traitement du request : Edit Stadium by ID
+app.put("/stadiums", (req,res)=>{
+  for (let i = 0; i < stadiums.length; i++) {
+    if (stadiums[i].id == req.body.id ){
+      stadiums[i] =req.body;
+      break;
+
+    }
+
+  }
+  res.json({ message: "Edited with success"});
+
+});
 
 
   //------------Exportation de l'app------------//

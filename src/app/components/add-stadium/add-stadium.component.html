@@ -1,11 +1,11 @@
-<app-banner title="Add Stadium"></app-banner>
+<app-banner [title]="title"></app-banner>
 
-  
+
   <div class="site-section">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <form #stadiumForm="ngForm" (ngSubmit)="addStadium()">
+          <form #stadiumForm="ngForm" (ngSubmit)="submit()">
             <div class="form-group">
               <input type="text" class="form-control" [(ngModel)]="stadium.name" name="name" placeholder="Name">
             </div>
@@ -15,9 +15,9 @@
             <div class="form-group">
                 <input type="text" class="form-control" [(ngModel)]="stadium.country" name="country" placeholder="Country">
               </div>
-            
+
             <div class="form-group">
-              <input type="submit" class="btn btn-primary py-3 px-5" value="Add Stadium">
+              <input type="submit" class="btn btn-primary py-3 px-5" [value]="title">
             </div>
           </form>
         </div>
