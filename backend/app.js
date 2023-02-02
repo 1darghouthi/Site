@@ -7,6 +7,16 @@ const express = require('express');
 
 const bodyParser = require("body-parser");
 
+// import mongoose module
+const mongoose = require ("mongoose");
+
+
+//Connect App to site
+mongoose.connect('mongodb://localhost:27017/SiteDB');
+
+// --------Creation de l'application BE-----------//
+// Creation express application
+
 const app = express();
 
 // Matches : DataBase
@@ -110,6 +120,9 @@ app.use((req, res, next) => {
     next();
   });
 
+  //-------Import Models---------//
+  const Match =require("./models/match");
+
   // importation models ==> le nom du const PascalCase
 
 const User = require("./models/user");
@@ -143,9 +156,16 @@ const User = require("./models/user");
   app.post("/matches", (req,res)=> {
     console.log("Here into add",req.body);
     // save object into matches
-    let match = req.body;
-    match.id = generateId(matches)+1;
-    matches.push(match);
+    let match = new Match({
+      scoreOne: req.body.scoreOne,
+      scoreTwo: req.body.scoreTwo,
+      teamOne: req.body.teamOne,
+      teamTwo: req.body.teamTwo
+
+    });
+    match.save();
+    //match.id = generateId(matches)+1;
+    //matches.push(match);
     // response
     res.json ({ message: "Added with success"});
   });
