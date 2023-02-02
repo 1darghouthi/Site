@@ -24,6 +24,21 @@
             <div class="form-group">
               <input type="text" class="form-control" [(ngModel)]="match.teamTwo" name="teamTwo" placeholder="Team Two">
             </div>
+
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <select class="custom-select" (change)="onSelect($event)">
+                  <option *ngFor="let s of stadiums" [value]="s.id">{{s.name}}</option>
+
+                </select>
+                <div class="input-group-append">
+                  <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                </div>
+              </div>
+
+            </div>
+
+
           <div class="form-group">
             <input type="submit" class="btn btn-primary py-3 px-5" value="Add Match">
           </div>
