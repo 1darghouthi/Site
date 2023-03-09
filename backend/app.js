@@ -11,8 +11,8 @@ const bodyParser = require("body-parser");
 const mongoose = require ("mongoose");
 
 
-//Connect App to site
-mongoose.connect('mongodb://localhost:27017/SiteDB');
+//Connect App to siteDB
+ mongoose.connect('mongodb://127.0.0.1:27017/SiteDB');
 
 // --------Creation de l'application BE-----------//
 // Creation express application
@@ -234,8 +234,8 @@ const User = require("./models/user");
    // Traitement du request :   Login User
    app.post("/users/login", (req, res) => {
     console.log("Here into login", req.body);
-    let isFounded=false;
-    let findedUser={};
+    let isFounded = false;
+    let findedUser = {};
     for (let i = 0; i < users.length; i++) {
       if (users[i].email == req.body.email && users[i].pwd == req.body.pwd){
         isFounded=true;
