@@ -39,11 +39,11 @@ export class UserService {
 
   //Add User
   signup(user){
-    return this.http.post<{message: string}>(this.userURL, user);
+    return this.http.post<{message: string}>(`${this.userURL}/signup`, user);
   }
 
   //Login (to connect)
   login(user){
-    return this.http.post<{user:any, isFounded:boolean}>(`${this.userURL}/login` , user);
+    return this.http.post<{user:any, message:string}>(`${this.userURL}/login` , user);
   }
 }

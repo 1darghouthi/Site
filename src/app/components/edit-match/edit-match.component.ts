@@ -24,31 +24,31 @@ export class EditMatchComponent implements OnInit {
     this.id = this.activatedRouter.snapshot.paramMap.get('id');
     this.matchService.displayMatchById(this.id).subscribe(
       (response)=>{
-        this.match = response.x;
+        this.match = response.match;
 
 
       }
-    ) 
+    )
    }
-    
+
 
     // for (let i = 0; i < this.T.length; i++) {
     //   if(this.T[i].id == this.id){
     //     this.match =this.T[i];
     //     break;
     //   }
-      
+
     // }
 
-    
+
   editMatch(){
     this.matchService.editMatch(this.match).subscribe(
       (response)=>{
         console.log("Here response from BE", response.message);
-        
+
         this.router.navigate(['admin']);
       }
-      
+
     )
   }
 

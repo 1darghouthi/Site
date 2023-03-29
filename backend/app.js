@@ -7,8 +7,15 @@ const express = require('express');
 
 const bodyParser = require("body-parser");
 
+
+
+
+
 // import mongoose module
 const mongoose = require ("mongoose");
+
+// import bcrypt module
+const bcrypt = require ("bcrypt");
 
 
 //Connect App to siteDB
@@ -121,26 +128,39 @@ app.use((req, res, next) => {
   });
 
   //-------Import Models---------//
-  const Match =require("./models/match");
+  const Match = require("./models/match");
+  const Team = require("./models/team");
+  const User = require("./models/user");
 
   // importation models ==> le nom du const PascalCase
 
-const User = require("./models/user");
 
+// ---------------Traitement Logique des Requests--------------//
 
-
+// Traitement du request: Get Match By ID
 
   app.get("/matches", (req, res)=>{
     console.log("Here into get all matches");
-    res.json({x:matches});
+    Match.find().then((docs) =>{
+      console.log("Here docs from DB", docs);
+
+
+    res.json({matches:docs});
   });
+});
 
   // Traitement du request : Get Match By ID
   app.get("/matches/:id", (req, res)=>{
     console.log("Here into get match by ID", req.params.id);
-    let match = matches.find((obj)=>{
-      return obj.id == req.params.id
-    });
+    Match.findOne({ _id: req.params.id}).then(
+      (doc)=> {
+        res.json({match:doc});
+
+      }
+    )
+    // let match = matches.find((obj)=>{
+    //   return obj.id == req.params.id
+    // });
     // for (let i =0; i <matches.length; i++){
 
     //  if (matches[i].id == req.params.id){
@@ -148,52 +168,81 @@ const User = require("./models/user");
     //   break;
     //  }
     // }
-    res.json({x:match});
+
 
   });
 
 // Traitement du request : Add Match
-  app.post("/matches", (req,res)=> {
-    console.log("Here into add",req.body);
+  app.post("/matches", (req, res)=> {
+    console.log("here into add", req.body);
     // save object into matches
     let match = new Match({
       scoreOne: req.body.scoreOne,
       scoreTwo: req.body.scoreTwo,
       teamOne: req.body.teamOne,
-      teamTwo: req.body.teamTwo
+      teamTwo: req.body.teamTwo,
 
     });
-    match.save();
-    //match.id = generateId(matches)+1;
-    //matches.push(match);
-    // response
-    res.json ({ message: "Added with success"});
+     match.save((err, doc) => {
+
+
+      if (err) {
+            // response
+    res.json ({ message: "Problem"});
+
+      } else {
+
+    res.json ({ message: "Match Added with success" });
+
+    }
+    });
+    // match.id = generateId(matches)+1;
+    // matches.push(match);
+
   });
 
   // Traitement du request : Delete Match By ID
   app.delete("/matches/:id", (req, res)=>{
     console.log("Here into delete", req.params.id);
-    for (let i=0; i<matches.length;i++) {
-      if (matches[i].id == req.params.id){
-        matches.splice(i, 1);
-        break;
-      }
-    }
-    res.json({message: "Deleted with success"});
+    Match.deleteOne({ _id: req.params.id}).then(
+      (response) =>{
+        console.log("Here response from DB", response);
+        if (response.deletedCount ==1) {
+          res.json({message: "Deleted with success"});
+
+        }
+      });
+    // for (let i=0; i<matches.length;i++) {
+    //   if (matches[i].id == req.params.id){
+    //     matches.splice(i, 1);
+    //     break;
+    //   }
+    // }
+
 
   });
 
    // Traitement du request : Edit Match By ID
-   app.put("/matches/:id", (req,res)=>{
-    console.log("Here into edit match Body", req.body);
-    console.log("Here into edit match ID", req.params.id);
-    for (let i=0; i<matches.length; i++){
-      if(matches[i].id== req.params.id){
-      matches[i] = req.body;
-      break;
-    }
-  }
-  res.json({message: "Edited with success"});
+   app.put("/matches/:id", (req, res)=>{
+    // console.log("Here into edit match Body", req.body);
+    // console.log("Here into edit match ID", req.params.id);
+    Match.updateOne({ _id: req.body._id}, req.body).then(
+      (response) =>{
+        console.log("Response after update", response);
+        if (response.modifiedCount ==1) {
+          res.json({message: "Updated with success"});
+
+        }
+      }
+    )
+    // **Match.updateOne({ _id: req.body._id}, req.body) **hedhi t3awedh boucle for
+  //   for (let i=0; i<matches.length; i++){
+  //     if(matches[i].id== req.params.id){
+  //     matches[i] = req.body;
+  //     break;
+  //   }
+  // }
+  // res.json({message: "Edited with success"});
    });
 
    // Traitement du request : search matches
@@ -213,12 +262,30 @@ const User = require("./models/user");
 
 
    // Traitement du request : Add User
-   app.post("/users", (req, res)=>{
+   app.post("/users/signup", (req, res)=>{
     console.log("Here into signup ", req.body);
-    let user = req.body;
-    user.id = generateId(users)+1;
-    users.push(user);
-    res.json({message: "User added with success"});
+    bcrypt.hash(req.body.pwd, 10).then((cryptedPwd)=>{
+      let user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      pwd: cryptedPwd,
+    });
+    user.save((err, doc)=>{
+      if (err) {
+        res.json({message: "Error with DB"});
+
+      }else {
+        res.json({message: "User added with success"});
+
+      }
+    });
+
+    });
+
+    // user.id = generateId(users)+1;
+    // users.push(user);
+
   });
 
 
@@ -234,30 +301,56 @@ const User = require("./models/user");
    // Traitement du request :   Login User
    app.post("/users/login", (req, res) => {
     console.log("Here into login", req.body);
-    let isFounded = false;
-    let findedUser = {};
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email == req.body.email && users[i].pwd == req.body.pwd){
-        isFounded=true;
-        findedUser={
-          firstName: users[i].firstName,
-          lastName: users[i].lastName,
-          email: users[i].email,
-          role: users[i].role,
+    User.findOne ({ email: req.body.email}).then(
+      (findedUser)=>{
+        console.log("Here finded User", findedUser);
+        if (!findedUser) {
+          res.json ({ message: "Email incorrect"});
 
-        };
-        break;
-      }
+        }
+        return bcrypt.compare(req.body.pwd, findedUser.pwd);
+      }).then((pwdResult)=>{
+          console.log("Here compare result", pwdResult);
+          if (!pwdResult) {
+            res.json ({message: "PWD incorrect"});
 
-    }
-    res.json ({ isFounded: isFounded, user: findedUser});
+          }
+          User.findOne({email:req.body.email}).then(
+
+            (finalUser)=> {
+              console.log("Here final user", finalUser);
+            let user ={
+              fName: finalUser.firstName,
+              lName: finalUser.lastName,
+            };
+            res.json({ message: "Welcom", user: user});
+          });
+
+        });
+    // let isFounded = false;
+    // let findedUser = {};
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].email == req.body.email && users[i].pwd == req.body.pwd){
+    //     isFounded=true;
+    //     findedUser={
+    //       firstName: users[i].firstName,
+    //       lastName: users[i].lastName,
+    //       email: users[i].email,
+    //       role: users[i].role,
+
+    //     };
+    //     break;
+    //   }
+
+    // }
+    // res.json ({ isFounded: isFounded, user: findedUser});
   });
 
 
    // traitement du request: Get user by id
 app.get("/users/:id", (req, res) => {
   console.log("Here into get user by ID", req.params.id)
-  User.findOne({ id : req.params.id}).then((doc)=>{
+  User.findOne({ _id : req.params.id}).then((doc)=>{
       res.json({ user : doc });
   })
   });
@@ -332,6 +425,18 @@ app.put("/stadiums", (req,res)=>{
   }
   res.json({ message: "Edited with success"});
 
+});
+
+app.post("/teams", (req, res)=>{
+  console.log("Here into add team", req.body);
+  let team= new Team({
+    name: req.body.name,
+    owner: req.body.owner,
+    stadium: req.body.stadium,
+    country: req.body.country,
+  });
+  team.save();
+  res.json({message: "Team added with success"});
 });
 
 

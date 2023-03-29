@@ -11,17 +11,17 @@ export class DisplayMatchComponent implements OnInit {
 
   match: any;
   id: any;
- 
+
   constructor(
     private activateRoute: ActivatedRoute,
     private matchService: MatchService) {}
-      
-   
+
+
   ngOnInit() {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
    this.matchService.displayMatchById(this.id).subscribe(
     (response) => {
-      this.match = response.x;
+      this.match = response.match;
     }
    )
     }

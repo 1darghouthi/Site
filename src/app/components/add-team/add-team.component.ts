@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-add-team',
@@ -10,19 +11,18 @@ export class AddTeamComponent implements OnInit {
 
   team: any = {};
   teamForm: FormGroup;
-  constructor() { }
+  constructor(private teamService: TeamService) { }
 
   ngOnInit() {
   }
   addTeam() {
     console.log("Here team object", this.team);
-    // var idTeam = JSON.parse(localStorage.getItem('idTeam') || '1');
-    // this.team.id = idTeam;
-    let teams = JSON.parse(localStorage.getItem('teams') || '[]');
-    this.team.id = this.generateId(teams) + 1;
-    teams.push(this.team);
-    localStorage.setItem('teams', JSON.stringify(teams));
-    // localStorage.setItem('idTeam', idTeam + 1);
+    this.teamService.addTeam(this.team).subscribe(
+      (response)=>{
+        console.log("Here response after adding team", response.message);
+
+      }
+    )
   }
 
   // teams.filter( obj => {return (obj.id > T[0].id)})

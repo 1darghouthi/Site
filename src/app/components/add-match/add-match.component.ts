@@ -36,7 +36,7 @@ export class AddMatchComponent implements OnInit {
 
   // Function that will be called when btn is clicked
   addMatch(){
-  console.log("Here match", this.match);
+
   this.match.stadiumId = this.stadiumId;
   this.matchService.addMatch(this.match).subscribe(
     (response)=> {

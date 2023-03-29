@@ -17,15 +17,15 @@ term:any;
   ngOnInit()  {
     this.matchService.getAllMatches().subscribe(
       (response)=>{
-        this.T = response.x;
+        this.T = response.matches;
       }
     )
 
-   
+
   }
 
   goToDisplay(id:number){
-    
+
    this.router.navigate([`displayMatch/${id}`]);
   }
 
@@ -35,7 +35,7 @@ term:any;
   color(a:number, b:number){
     if (a > b) {
       return'green';
-      
+
     }else if (a < b){
       return 'red';
     } else {
@@ -50,7 +50,7 @@ term:any;
         console.log("Here response after delete", response.message);
         this.matchService.getAllMatches().subscribe(
           (response)=> {
-            this.T = response.x;
+            this.T = response.matches;
           }
         )
       }

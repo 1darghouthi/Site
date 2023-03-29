@@ -26,7 +26,7 @@ export class  LoginComponent implements OnInit {
     console.log("Here user object", this.user);
     this.userService.login(this.user).subscribe(
       (response)=>{
-        if (response.isFounded) {
+        if (response.message) {
          if (response.user.role == 'client') {
           this.router.navigate(['']);
 

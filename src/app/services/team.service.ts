@@ -20,11 +20,11 @@ export class TeamService {
   }
 
   deleteTeamById(id){
-    return this.httpClient.delete(`${this.teamURL}/${id}`); 
+    return this.httpClient.delete(`${this.teamURL}/${id}`);
   }
 
   addTeam(team){
-    return this.httpClient.post (this.teamURL, team);
+    return this.httpClient.post<{message:string}>(this.teamURL, team);
   }
 
   editTeam(team){

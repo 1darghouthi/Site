@@ -12,25 +12,25 @@ export class MatchService {
 
   matchURL: string ="http://localhost:3000/matches";
 
-  // HttpClient : module d'envoie de Req (request) 
+  // HttpClient : module d'envoie de Req (request)
   // en reception de Res (response)
 
   constructor(private http: HttpClient) { }
 
   getAllMatches() {
-    return this.http.get<{x:any}>(this.matchURL);
+    return this.http.get<{matches:any}>(this.matchURL);
   }
 
   displayMatchById(id) {
-    return this.http.get<{x:any}>(`${this.matchURL}/${id}`);
+    return this.http.get<{match:any}>(`${this.matchURL}/${id}`);
     // return this.http.get (this.matchURL + `/${id}`);
   }
-  
- 
+
+
   addMatch(obj : any) {
     return this.http.post<{message:string}> (this.matchURL, obj);
   }
-  
+
   editMatch(obj) {
     return this.http.put<{message:string}>(`${this.matchURL}/${obj.id}`, obj);
   }
