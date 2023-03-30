@@ -44,6 +44,6 @@ export class UserService {
 
   //Login (to connect)
   login(user){
-    return this.http.post<{user:any, message:string}>(`${this.userURL}/login` , user);
+    return this.http.post<{user:any, message: string}>(`${this.userURL}/login` , user);
   }
 }

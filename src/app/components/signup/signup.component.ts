@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
 
   signupForm:FormGroup;
   path:string;
+  msgError: string;
 
   constructor(
     private formBuilder:FormBuilder,
@@ -42,7 +43,15 @@ export class SignupComponent implements OnInit {
     this.userService.signup(this.signupForm.value).subscribe(
       (response) => {
         console.log("Here response after signup", response.message);
-        this.router.navigate(['']);
+        if (response.message == "Email Exist") {
+          this.msgError = response.message;
+
+        } else {
+          this.router.navigate(['']);
+
+        }
+
+
 
       }
     )

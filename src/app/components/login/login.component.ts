@@ -23,20 +23,35 @@ export class  LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   login(){
-    console.log("Here user object", this.user);
+
     this.userService.login(this.user).subscribe(
       (response)=>{
-        if (response.message) {
-         if (response.user.role == 'client') {
-          this.router.navigate(['']);
 
-         } else {
-          this.router.navigate(['admin']);
-         }
-        } else{
-          this.errorMsg="Please check Email/Pwd";
+        if (response.message =="2") {
+          if (response.user.role == "client"){
+            this.router.navigate(['']);
 
+          } else {
+            this.router.navigate(['admin']);
+
+          }
+
+
+        } else {
+          this.errorMsg ='Please check Email/PWD';
         }
+
+        // if (response.message) {
+        //  if (response.user.role == 'client') {
+        //   this.router.navigate(['']);
+
+        //  } else {
+        //   this.router.navigate(['admin']);
+        //  }
+        // } else{
+        //   this.errorMsg="Please check Email/Pwd";
+
+        // }
 
       }
     );

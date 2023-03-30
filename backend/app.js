@@ -270,10 +270,13 @@ app.use((req, res, next) => {
       lastName: req.body.lastName,
       email: req.body.email,
       pwd: cryptedPwd,
+      role: req.body.role,
     });
     user.save((err, doc)=>{
+      console.log("Here error", err);
+      console.log("Here doc", doc);
       if (err) {
-        res.json({message: "Error with DB"});
+        res.json({message: "Email Exist"});
 
       }else {
         res.json({message: "User added with success"});
@@ -301,31 +304,32 @@ app.use((req, res, next) => {
    // Traitement du request :   Login User
    app.post("/users/login", (req, res) => {
     console.log("Here into login", req.body);
-    User.findOne ({ email: req.body.email}).then(
-      (findedUser)=>{
+
+    User.findOne ({ email: req.body.email}).then((findedUser)=>{
         console.log("Here finded User", findedUser);
         if (!findedUser) {
           res.json ({ message: "Email incorrect"});
 
         }
         return bcrypt.compare(req.body.pwd, findedUser.pwd);
-      }).then((pwdResult)=>{
+      })
+      .then((pwdResult)=>{
           console.log("Here compare result", pwdResult);
           if (!pwdResult) {
-            res.json ({message: "PWD incorrect"});
+            console.log(" Send response with incorrect PWD");
+            res.json ({message: "1"});
 
-          }
-          User.findOne({email:req.body.email}).then(
 
-            (finalUser)=> {
+          } else {
+          User.findOne({email: req.body.email}).then((finalUser)=> {
               console.log("Here final user", finalUser);
             let user ={
               fName: finalUser.firstName,
               lName: finalUser.lastName,
             };
-            res.json({ message: "Welcom", user: user});
+            res.json({ message: "2", user: user});
           });
-
+        }
         });
     // let isFounded = false;
     // let findedUser = {};
